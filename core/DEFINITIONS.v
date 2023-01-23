@@ -60,6 +60,11 @@
     `define LBU_FUNCT3              3'b100
     `define LHU_FUNCT3              3'b101
 
+`define INST_I_JALR                 7'b1100111
+    // FUNCT3
+    // I extension
+    `define JALR_FUNCT3             3'b000
+
 `define INST_I_SHIFT                7'b0010011
     // FUNCT3
     // I extension
@@ -72,11 +77,26 @@
     `define SRLI_FUNCT7             7'b0
     `define SRAI_FUNCT7             7'b0100000
 
-`define INST_I_JALR                 7'b1100111
+`define INST_I_FENCE                7'b0001111
     // FUNCT3
-    // I extension
-    `define JALR_FUNCT3             3'b000
-    
+    `define FENCE_FUNCT3            3'b000
+    `define FENCEI_FUNCT3           3'b001
+
+`define INST_I_CALL_N_BREAK         7'b1110011
+    // IMM values
+    `define ECALL_IMM               12'b0
+    `define EBREAK_IMM              12'b1    
+
+`define INST_I_CSR                  7'b1110011
+    //FUNCT3
+    `define CSRRW_FUNCT3            3'b001
+    `define CSRRS_FUNCT3            3'b010
+    `define CSRRC_FUNCT3            3'b011
+    // Immediate CSR
+    `define CSRRWI_FUNCT3           3'b101
+    `define CSRRSI_FUNCT3           3'b110
+    `define CSRRCI_FUNCT3           3'b111
+
 // S-TYPE
 `define INST_S_STORE                7'b0100011
     // I extension
