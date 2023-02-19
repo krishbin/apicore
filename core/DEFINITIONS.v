@@ -167,6 +167,7 @@
 `define BR_OPCODE_BGE 3'b101
 `define BR_OPCODE_BLTU 3'b110
 `define BR_OPCODE_BGEU 3'b111
+`define BR_OPCODE_NONE 3'b011
 
 // Data origins 
 `define DATA_ORIGIN_WIDTH		2
