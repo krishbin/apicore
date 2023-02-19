@@ -139,18 +139,28 @@
 `define ALU_OPCODE_REM              5'b10110
 `define ALU_OPCODE_REMU             5'b10110
 
-// LSU-OPCODES
-`define LSU_OPCODE_SIZE             8
-// func3 opcode D6:D2
-`define LSU_OPCODE_LB               8'b00000000
-`define LSU_OPCODE_LH               8'b00100000
-`define LSU_OPCODE_LW               8'b01000000
-`define LSU_OPCODE_LBU              8'b10000000
-`define LSU_OPCODE_LHU              8'b10100000
-`define LSU_OPCODE_SB               8'b00001000
-`define LSU_OPCODE_SH               8'b00101000
-`define LSU_OPCODE_SW               8'b01001000
-`define LSU_OPCODE_NONE             8'b11111111
+`define BR_OPCODE_WIDTH 3
+
+`define BR_OPCODE_BEQ 3'b000
+`define BR_OPCODE_BNE 3'b001
+`define BR_OPCODE_BLT 3'b100
+`define BR_OPCODE_BGE 3'b101
+`define BR_OPCODE_BLTU 3'b110
+`define BR_OPCODE_BGEU 3'b111
+
+// Data origins 
+`define DATA_ORIGIN_WIDTH		2
+`define REGISTER        0		
+`define RS1_IMM    		1
+`define PC_IMM      	2
+`define UNUSED 		    3
+
+// Data destinations
+`define DATA_TARGET_WIDTH  2
+`define DATA_TARGET_ALU    0
+`define DATA_TARGET_MEM    1
+`define DATA_TARGET_PC     2
+`define DATA_TARGET_CSR    3
 
 `endif
 // END OF INSTRUCTION SET CODES
