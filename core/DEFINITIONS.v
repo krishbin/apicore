@@ -128,6 +128,7 @@
     `define BGEU_FUNCT3             3'b111
 
 // ALU-OPCODES
+`define ALU_OPCODE_WIDTH 5
 // RV32I
 // 0 func7 D5 func3                                            
 // RV32M
