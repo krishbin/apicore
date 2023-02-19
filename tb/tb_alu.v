@@ -1,4 +1,4 @@
-`include "alu.v"
+`include "../core/alu.v"
 
 module rv32im_alu_testbench();
 reg[31:0] a,b;
