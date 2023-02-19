@@ -5,10 +5,23 @@
 `define LSU_CMD_LOAD  1'b1
 `define LSU_CMD_STORE 1'b1
 
+// LSU-OPCODES
+`define LSU_OPCODE_WIDTH             8
+// func3 opcode D6:D2
+`define LSU_OPCODE_LB               8'b00000000
+`define LSU_OPCODE_LH               8'b00100000
+`define LSU_OPCODE_LW               8'b01000000
+`define LSU_OPCODE_LBU              8'b10000000
+`define LSU_OPCODE_LHU              8'b10100000
+`define LSU_OPCODE_SB               8'b00001000
+`define LSU_OPCODE_SH               8'b00101000
+`define LSU_OPCODE_SW               8'b01001000
+`define LSU_OPCODE_NONE             8'b11111111
+
 // DMEM interface
 // memory command (read/write)
-`define MEM_CMD_RD 1'b0
-`define MEM_CMD_WR 1'b1
+`define MEM_CMD_READ 1'b0
+`define MEM_CMD_WRITE 1'b1
 
 // memory width (byte/halfword/word)
 `define MEM_WIDTH_BYTE     = 2'b00
