@@ -79,7 +79,7 @@ module rv32im_exu(
                 endcase
         end
 
-        alu rv32im_alu (
+        rv32im_alu alu1 (
                 .aluoperand_1_i(aluoperand_1),
                 .aluoperand_2_i(aluoperand_2),
                 .alu_opcode_i(alu_opcode_i),
@@ -87,7 +87,7 @@ module rv32im_exu(
                 .alu_zero_o(alu_zero)
         );
 
-        lsu rv32im_lsu (
+        rv32im_lsu lsu1 (
                 .lsu_opcode_i(lsu_opcode_i),
                 // unimodified input from exu | data request from memory
                 .val_memrd_i(val_memdatard_i),
@@ -97,16 +97,16 @@ module rv32im_exu(
                 .val_memwr_i(rs2_i),
                 // first data is sent by exu to lsu and then
                 // modified by lsu and sent to exu
-                .val_memrd_o(mem_ouput),
+                .val_memrd_o(mem_output),
                 // data sent from exu to lsu
                 .addr_mem_i(alu_result),
                 .addr_mem_o(val_memaddr_o)
         );
 
-        br rv32im_br (
+        rv32im_br br1 (
                 .alu_zero_i(alu_zero),
-                .br_en(is_branch_i),
-                .br_conditional(is_condition_i),
+                .br_en_i(is_branch_i),
+                .br_conditional_i(is_condition_i),
                 .exu_calc_addr(alu_result),
                 .nxt_pc_o(nxt_pc), // pc + 4
                 .br_opcode_i(br_opcode_i),
