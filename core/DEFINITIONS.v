@@ -51,6 +51,7 @@
 
 // I-TYPE
 `define INST_I_ALU                  7'b0010011
+    // FUNCT3
     // I extension
     `define ADDI_FUNCT3             3'b000
     `define SLTI_FUNCT3             3'b010
@@ -58,6 +59,14 @@
     `define XORI_FUNCT3             3'b100
     `define ORI_FUNCT3              3'b110
     `define ANDI_FUNCT3             3'b111
+    `define SLLI_FUNCT3             3'b001
+    `define SRLI_FUNCT3             3'b101
+    `define SRAI_FUNCT3             3'b101
+    //FUNCT7
+    // I extension
+    `define SLLI_FUNCT7             7'b0
+    `define SRLI_FUNCT7             7'b0
+    `define SRAI_FUNCT7             7'b0100000
 
 `define INST_I_LOAD                 7'b0000011
     // I extension
