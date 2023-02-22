@@ -36,13 +36,13 @@
     // FUNCT7
     // I extension
     `define ADD_FUNCT7              7'b0
-    `define SUB_FUNCT7              7'b01000000
+    `define SUB_FUNCT7              7'b0100000
     `define SLL_FUNCT7              7'b0
     `define SLT_FUNCT7              7'b0
     `define SLTU_FUNCT7             7'b0
     `define XOR_FUNCT7              7'b0
     `define SRL_FUNCT7              7'b0
-    `define SRA_FUNCT7              7'b01000000
+    `define SRA_FUNCT7              7'b0100000
     `define OR_FUNCT7               7'b0
     `define AND_FUNCT7              7'b0
     // M extension
