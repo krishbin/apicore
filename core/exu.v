@@ -45,15 +45,15 @@ module rv32im_exu(
                 aluoperand_2 = 0;
 
                 case (data_origin_i)
-                        `REGISTER: begin
+                        `DATA_ORIGIN_REGISTER: begin
                                 aluoperand_1 = rs1_i;
                                 aluoperand_2 = rs2_i;
                         end
-                        `RS1_IMM: begin
+                        `DATA_ORIGIN_RS1_IMM: begin
                                 aluoperand_1 = rs1_i;
                                 aluoperand_2 = imm_i;
                         end
-                        `PC_IMM: begin
+                        `DATA_ORIGIN_PC_IMM: begin
                                 aluoperand_1 = curr_pc_i;
                                 aluoperand_2 = imm_i;
                         end

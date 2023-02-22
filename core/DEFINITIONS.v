@@ -171,10 +171,10 @@
 
 // Data origins 
 `define DATA_ORIGIN_WIDTH		2
-`define REGISTER        0		
-`define RS1_IMM    		1
-`define PC_IMM      	2
-`define UNUSED 		    3
+`define DATA_ORIGIN_REGISTER        0		
+`define DATA_ORIGIN_RS1_IMM    		1
+`define DATA_ORIGIN_PC_IMM      	2
+`define DATA_ORIGIN_UNUSED 		    3
 
 // Data destinations
 `define DATA_TARGET_WIDTH  2
