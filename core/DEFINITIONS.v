@@ -4,19 +4,24 @@
 // RV32IM INSTRUCTION SET CODES
 `define API_ADDR_WIDTH              32
 `define API_DATA_WIDTH              32
+`define API_REGISTER_WIDTH          32
+`define API_REGISTER_COUNT          32
+`define API_REGISTER_ADDR_WIDTH     5
+
+`define API_PC_WIDTH                34
+`define API_RESET_PC                32'h00000000
+`define API_XLEN                    32
 
 // R-TYPE
 `define INST_R_ALU                  7'b0110011
     // FUNCT3
     // I extension
-    `define ADD_FUNCT3              3'b000
-    `define SUB_FUNCT3              3'b000
+    `define ADD_SUB_FUNCT3              3'b000
     `define SLL_FUNCT3              3'b001
     `define SLT_FUNCT3              3'b010
     `define SLTU_FUNCT3             3'b011
     `define XOR_FUNCT3              3'b100
-    `define SRL_FUNCT3              3'b101
-    `define SRA_FUNCT3              3'b101
+    `define SRL_SRA_FUNCT3              3'b101
     `define OR_FUNCT3               3'b110
     `define AND_FUNCT3              3'b111
     // M extension
