@@ -20,7 +20,7 @@ rv32im_lsu a1(
     .addr_mem_o(addr_mem_o),
 
     .wr_mask_o(wr_mask),
-    .enable_o(enable),
+    .enable_o(enable)
     );
 
 initial begin
