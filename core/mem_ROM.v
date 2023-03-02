@@ -13,7 +13,7 @@ module mem_ROM(
 
     always @(posedge clk or negedge reset_n) begin
         if (~reset_n)
-            $readmemh("../bin/code/program.mem", simulated_ROM);
+            $readmemh("../code/program.mem", simulated_ROM);
         if (~en_n) begin
                 if ( |address_i[`API_DATA_WIDTH-1:13] )
                     $display("ROM memory out of bound.\n");
