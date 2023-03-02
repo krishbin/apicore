@@ -16,7 +16,7 @@ module mem_RAM (
     integer i;
     always @(posedge clk or negedge reset_n) begin
         if (~reset_n) begin
-            for (i=0; i<16384; i++)
+            for (i=0;i<16384;i=i+1)
                 simulated_RAM[i] = 32'b0;
         end
 
