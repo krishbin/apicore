@@ -141,7 +141,7 @@ module decoder_tb();
     end
 
     initial begin
-        $dumpfile("../waveforms/rv32_decoder_tb.vcd");
+        $dumpfile("../waveform/rv32_decoder_tb.vcd");
         $dumpvars();
     end
 
