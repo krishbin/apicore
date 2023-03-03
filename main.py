@@ -41,6 +41,11 @@ def runtestbench(file):
     os.system(f'cd {ROOT_DIR}/waveform && vvp {ROOT_DIR}/bin/{file[:-2]}')
 
 def main():
+    if len(sys.argv) > 1:
+        abs_path = os.path.abspath(os.path.dirname(__file__))
+        filepath = os.path.join(abs_path, sys.argv[1])
+        runtestbench(sys.argv[1])
+        sys.exit(0)
     print('Running sanity check...')
     sanitycheck()
     print('Sanity check passed')
