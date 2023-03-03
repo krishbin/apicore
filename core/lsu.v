@@ -29,10 +29,10 @@ module rv32im_lsu (
                 
                 case (lsu_opcode_i)
                         // Load word, halfword, byte
-                        `LSU_OPCODE_LB: val_memrd_o = { { `API_DATA_WIDTH - 1 {val_memrd_i[7]}}, val_memrd_i[7:0] };
-                        `LSU_OPCODE_LBU: val_memrd_o = { {`API_DATA_WIDTH-8{1'b0}} , val_memrd_i[7:0]};
-                        `LSU_OPCODE_LH: val_memrd_o = { { `API_DATA_WIDTH - 1 {val_memrd_i[15]}}, val_memrd_i[15:0] };
-                        `LSU_OPCODE_LHU: val_memrd_o = { {`API_DATA_WIDTH-16{1'b0}} , val_memrd_i[15:0]};
+                        `LSU_OPCODE_LB: val_memrd_o = { { `API_DATA_WIDTH - 8 {val_memrd_i[7]}}, val_memrd_i[7:0] };
+                        `LSU_OPCODE_LBU: val_memrd_o = { {`API_DATA_WIDTH - 8{1'b0}} , val_memrd_i[7:0]};
+                        `LSU_OPCODE_LH: val_memrd_o = { { `API_DATA_WIDTH - 16 {val_memrd_i[15]}}, val_memrd_i[15:0] };
+                        `LSU_OPCODE_LHU: val_memrd_o = { {`API_DATA_WIDTH - 16{1'b0}} , val_memrd_i[15:0]};
                         `LSU_OPCODE_LW: val_memrd_o = val_memrd_i;
 
                         //store word, halfword, byte
