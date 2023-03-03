@@ -71,11 +71,14 @@ module rv32im_decoder_and_cu(
 
     wire [2:0] instruction_type;
 
+    reg we_csr,re_csr;
     // decode next available instruction
     always @(*) begin
 
         mem_w_o = 1'b0;
         reg_w_o = 1'b0;
+        we_csr = 1'b0;
+        re_csr = 1'b0;
         is_branch_o = 1'b0;
         is_condition_o = 1'b0;
         data_origin_o = {`DATA_ORIGIN_WIDTH{1'b0}};
@@ -178,27 +181,38 @@ module rv32im_decoder_and_cu(
                 case(func3)
                     `ECALL_EBREAK_FUNCT3: ;
                     `CSRRW_FUNCT3: begin
-                        csr_opcode_o = `CSRRW;
-                        csr_data_o = rs1;
+                        if ( rd != 0 ) begin
+                            we_csr = 1'b1;
+                            re_csr = 1'b1;
+                            data_target_o = `DATA_TARGET_CSR;
+                            csr_opcode_o = `CSR_OPCODE_CSRRW;
+                            csr_data_o = rs1;
+                        end
                     end
                     `CSRRS_FUNCT3: begin
-                        csr_opcode_o = `CSRRS;
+                        we_csr = ( rs1 == 5'h0 ) ? 1'b1 : 1'b0;
+                        re_csr = 1'b1;
+                        data_target_o = `DATA_TARGET_CSR;
+                        csr_opcode_o = `CSR_OPCODE_CSRRS;
                         csr_data_o = rs1;
                     end
                     `CSRRC_FUNCT3: begin
-                        csr_opcode_o = `CSRRC;
+                        we_csr = ( rs1 == 5'h0 ) ? 1'b1 : 1'b0;
+                        re_csr = 1'b1;
+                        data_target_o = `DATA_TARGET_CSR;
+                        csr_opcode_o = `CSR_OPCODE_CSRRS;
                         csr_data_o = rs1;
                     end
                     `CSRRWI_FUNCT3: begin
-                        csr_opcode_o = `CSRRWI;
+                        csr_opcode_o = `CSR_OPCODE_CSRRWI;
                         csr_data_o = imm_12;
                     end
                     `CSRRSI_FUNCT3: begin
-                        csr_opcode_o = `CSRRSI;
+                        csr_opcode_o = `CSR_OPCODE_CSRRSI;
                         csr_data_o = imm_12;
                     end
                     `CSRRCI_FUNCT3: begin
-                        csr_opcode_o = `CSRRCI;
+                        csr_opcode_o = `CSR_OPCODE_CSRRCI;
                         csr_data_o = imm_12;
                     end
                 endcase
