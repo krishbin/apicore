@@ -1,4 +1,4 @@
-`include "DEFINITIONS.v"
+`include "../core/DEFINITIONS.v"
 
 module rv32im_br(
     //from execution unit

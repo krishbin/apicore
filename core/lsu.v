@@ -1,6 +1,4 @@
-`include "DEFINITIONS.v"
-`include "memifdef.v"
-
+`include "../core/DEFINITIONS.v"
 
 module rv32im_lsu (
         // mem_interface

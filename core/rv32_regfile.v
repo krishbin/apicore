@@ -1,5 +1,6 @@
 // APICORE : RV32I 
 // Date    : 2023-01-23
+`include "../core/DEFINITIONS.v"
 
 module rv32im_regfile(
     input clk_i, 
@@ -19,17 +20,16 @@ module rv32im_regfile(
     always @(posedge clk_i or negedge rst_n_i) begin
         
         if ( ~rst_n_i ) begin
-
             for (i=0;i<`API_REGISTER_COUNT;i=i+1)
                 registerArray[i] <= 'b0;
         end
         else begin
             if ( (rd_addr_i !== 5'b0) && we_i )
-                registerArray[rd_addr_i] = val_rd_i;
+                registerArray[rd_addr_i] <= val_rd_i;
         end
     end
 
-    assign val_rs1_o = (rs1_addr_i == 5'b0) ? registerArray[rs1_addr_i] : { `API_REGISTER_WIDTH{1'b0} };
-    assign val_rs2_o = (rs2_addr_i == 5'b0) ? registerArray[rs2_addr_i] : { `API_REGISTER_WIDTH{1'b0} };
+    assign val_rs1_o = (rs1_addr_i === 5'b0) ? { `API_REGISTER_WIDTH{1'b0} } : registerArray[rs1_addr_i];
+    assign val_rs2_o = (rs2_addr_i === 5'b0) ? { `API_REGISTER_WIDTH{1'b0} } : registerArray[rs2_addr_i];
 
 endmodule

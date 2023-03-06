@@ -1,4 +1,4 @@
-`include "DEFINITIONS.v"
+`include "../core/DEFINITIONS.v"
 
 module rv32im_decoder_and_cu(
     input clk,
@@ -81,18 +81,18 @@ module rv32im_decoder_and_cu(
         re_csr = 1'b0;
         is_branch_o = 1'b0;
         is_condition_o = 1'b0;
-        data_origin_o = {`DATA_ORIGIN_WIDTH{1'b0}};
-        data_target_o = {`DATA_TARGET_WIDTH{1'b0}};
-        imm_o = {`API_DATA_WIDTH{1'b0}};
-        rs1_addr_o = {`API_REGISTER_ADDR_WIDTH{1'b0}};
-        rs2_addr_o = {`API_REGISTER_ADDR_WIDTH{1'b0}};
-        rd_addr_o = {`API_REGISTER_ADDR_WIDTH{1'b0}};
-        alu_opcode_o = {`ALU_OPCODE_WIDTH{1'b0}};
-        lsu_opcode_o = {`LSU_OPCODE_WIDTH{1'b0}};
-        br_opcode_o = {`BR_OPCODE_WIDTH{1'b0}};
-        csr_opcode_o = {`CSR_OPCODE_WIDTH{1'b0}};
-        csr_addr_o = {`CSR_WIDTH{1'b0}};
-        csr_data_o = {`API_DATA_WIDTH{1'b0}};
+        data_origin_o = 'bz;
+        data_target_o = 'bz;
+        imm_o = 'bz;
+        rs1_addr_o = 'bz;
+        rs2_addr_o = 'bz;
+        rd_addr_o = 'bz;
+        alu_opcode_o = 'bz;
+        lsu_opcode_o = 'bz;
+        br_opcode_o = 'bz;
+        csr_opcode_o = 'bz;
+        csr_addr_o = 'bz;
+        csr_data_o = 'bz;
         
         opcode = instruction[6:0];
         func7 = instruction[31:25];
@@ -177,6 +177,7 @@ module rv32im_decoder_and_cu(
             `INST_I_SYS: begin
                 reg_w_o = 1'b1;
                 rd_addr_o = rd;
+                rs1_addr_o = rs1;
                 csr_addr_o = imm_12;
                 case(func3)
                     `ECALL_EBREAK_FUNCT3: ;
@@ -291,11 +292,11 @@ module rv32im_decoder_and_cu(
                     end
                     `BLTU_FUNCT3: begin
                         alu_opcode_o = `ALU_OPCODE_SLTU;
-                        br_opcode_o = `BR_OPCODE_BLT;
+                        br_opcode_o = `BR_OPCODE_BLTU;
                     end
                     `BGEU_FUNCT3: begin
                         alu_opcode_o = `ALU_OPCODE_SLTU;
-                        br_opcode_o = `BR_OPCODE_BGE;
+                        br_opcode_o = `BR_OPCODE_BGEU;
                     end
                 endcase
             end
@@ -305,7 +306,7 @@ module rv32im_decoder_and_cu(
                 rd_addr_o = 5'b0;
                 alu_opcode_o = `ALU_OPCODE_ADD;
                 data_origin_o = `DATA_ORIGIN_REGISTER;
-                imm_o = 32'b0;
+                imm_o = 32'bz;
                 reg_w_o = 1'b0;
                 is_branch_o = 1'b0;
                 is_condition_o = 1'b0;

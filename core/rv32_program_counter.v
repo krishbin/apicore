@@ -1,3 +1,5 @@
+`include "../core/DEFINITIONS.v"
+
 module rv32im_pc(
     input clk, 
     input reset_n, 
