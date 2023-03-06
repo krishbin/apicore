@@ -29,7 +29,7 @@ rv32im_csr csr_reg(
 
 initial begin
 
-    $dumpfile("csr.vcd");
+    $dumpfile("../waveform/csr.vcd");
     $dumpvars();
     $monitor("clk=%h, rst_n=%h, csr_opcode=%h, csr_addr=%h, val_csr_to_write=%h, csr_write_en=%h, val_csr_to_read=%h, csr_read_en=%h", clk, rst_n, csr_opcode, csr_addr, val_csr_to_write, csr_write_en, val_csr_to_read, csr_read_en);
     // Initialize Inputs

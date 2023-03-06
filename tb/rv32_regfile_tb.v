@@ -82,7 +82,7 @@ module rv32_regfile_tb();
 
     // output file
     initial begin
-        $dumpfile("../waveforms/rv32_regfile_tb.vcd");
+        $dumpfile("../waveform/rv32_regfile_tb.vcd");
         $dumpvars();
     end
 

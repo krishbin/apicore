@@ -19,7 +19,7 @@ rv32im_lsu a1(
     );
 
 initial begin
-    $dumpfile("lsu.vcd");
+    $dumpfile("../waveform/lsu.vcd");
     $dumpvars();
     $monitor("lsu_opcode=%b, read_from_mem=%b, write_to_mem=%b, exu_data_to_mem=%b, mem_data_to_exu=%b, addr=%b, addr_mem_o=%d \n", opcode, read_from_mem, write_to_mem, exu_data_to_mem, mem_data_to_exu, addr, addr_mem_o);
     opcode=`LSU_OPCODE_LW; addr=32'd0; exu_data_to_mem=32'd0; read_from_mem=32'd849341;

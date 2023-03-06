@@ -44,7 +44,7 @@ module rv32im_pc_tb();
     end
 
     initial begin
-        $dumpfile("../waveforms/rv32_programCounter.vcd");
+        $dumpfile("../waveform/rv32_programCounter.vcd");
         $dumpvars();
     end
 
