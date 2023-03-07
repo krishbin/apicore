@@ -141,6 +141,7 @@
 // 0      f7(D5)    I
 // 1      0         M
 // 1      1         F
+
 `define ALU_OPCODE_WIDTH            5
 `define ALU_OPCODE_ADD              5'b00000
 `define ALU_OPCODE_SUB              5'b01000
@@ -320,3 +321,6 @@
 `define EXC_CODE_ST_ADDR_MISALIGN      = 4'd6,     // from LSU
 `define EXC_CODE_ST_ACCESS_FAULT       = 4'd7,     // from LSU
 `define EXC_CODE_ECALL_M               = 4'd11     // from IDU
+
+`endif
+// END OF INSTRUCTION SET CODES

@@ -105,6 +105,6 @@ ipshared
 *.vcd
 /tb/*.vvp       
 /tb/*.vvp       
-bin
-waveform
-waveforms
+bin/
+waveform/
+waveforms/

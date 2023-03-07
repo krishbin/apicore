@@ -1,5 +1,4 @@
 `include "../core/DEFINITIONS.v"
-
 module rv32im_alu(
     input [`API_DATA_WIDTH-1:0] aluoperand_1_i,
     input [`API_DATA_WIDTH-1:0] aluoperand_2_i,
@@ -18,7 +17,8 @@ always @ * begin
     case (alu_opcode_i)
 
         // Arithmetic
-        `ALU_OPCODE_ADD: begin
+        `ALU_OPCODE_ADD: 
+        begin
             alu_o = aluoperand_1_i + aluoperand_2_i; // ADD
         end
         `ALU_OPCODE_SUB: 

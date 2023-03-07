@@ -1,7 +1,7 @@
 `include "../core/DEFINITIONS.v"
-`include "lsu.v"
-`include "alu.v"
-`include "br.v"
+`include "../core/lsu.v"
+`include "../core/alu.v"
+`include "../core/br.v"
 
 module rv32im_exu(
         // decocder to exu interface
@@ -18,7 +18,7 @@ module rv32im_exu(
         // exu to lsu interface
         input [`API_DATA_WIDTH-1:0]  val_memdatard_i, // data read from memory
         output [`API_DATA_WIDTH-1:0] val_memdatawr_o, // data to write to memory
-        output [`API_ADDR_WIDTH-1:0] val_memaddr_o, // address to read and write from  
+        output [`API_ADDR_WIDTH-1:0] val_memaddr_o, // address to read and write from
         // exu to br interface
         input is_branch_i,
         input is_condition_i,

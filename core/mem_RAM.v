@@ -3,7 +3,7 @@
 module mem_RAM (
     input clk, 
     input reset_n, 
-    input en,           // chip select, active low
+    input en,           // chip select, active high
     
     input [`API_ADDR_WIDTH-1:0] address_i,
     input [`API_DATA_WIDTH-1:0] data_in_i,
@@ -21,7 +21,7 @@ module mem_RAM (
                 simulated_RAM[i] = 32'b0;
         end
 
-        if (en_n) begin
+        if (en) begin
             if (~|wr_mask_i)    // none of the wr mask is high implies read operation
                 data_out_o = simulated_RAM[address];
             else begin
