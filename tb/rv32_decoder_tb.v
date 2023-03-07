@@ -2,33 +2,51 @@
 `include "../core/rv32_decoder.v"
 
 module decoder_tb();
-
     reg clk;
     reg [31:0] instruction;
 
-    wire [31:0] decoded_value;
-    wire [4:0] rs1, rs2, rd;
-    wire [6:0] opcode;
-    wire [2:0] funct3;
-    wire [6:0] funct7;
-    wire shift_la_sel, trap;
-    wire e_call_break;
-    wire [7:0] pred_succ;
+    // Execution Unit 
+    wire [`DATA_ORIGIN_WIDTH-1:0] data_origin;
+    wire [`DATA_TARGET_WIDTH-1:0] data_target;
+    wire [`API_DATA_WIDTH-1:0] imm;
+    // register file
+    wire [`API_REGISTER_ADDR_WIDTH-1:0] rs1_addr;
+    wire [`API_REGISTER_ADDR_WIDTH-1:0] rs2_addr;
+    wire [`API_REGISTER_ADDR_WIDTH-1:0] rd_addr;
+    // alu
+    wire [`ALU_OPCODE_WIDTH-1:0] alu_opcode;
+    wire [`LSU_OPCODE_WIDTH-1:0] lsu_opcode;
+    //branch
+    wire [`BR_OPCODE_WIDTH-1:0] br_opcode;
+    wire is_branch;
+    wire is_condition;
+    //CSR Unit
+    wire [`CSR_OPCODE_WIDTH-1:0] csr_opcode;
+    wire [`CSR_WIDTH-1:0] csr_addr;
+    wire [`API_DATA_WIDTH-1:0] csr_data;
+    // memory
+    wire mem_w;
+    wire reg_w;
 
-    decoder uut(
+    rv32im_decoder_and_cu uut(
         .clk(clk),
         .instruction(instruction),
-        .decoded_value(decoded_value),
-        .rs1(rs1),
-        .rs2(rs2),
-        .rd(rd),
-        .opcode(opcode),
-        .funct3(funct3),
-        .funct7(funct7),
-        .shift_la_sel(shift_la_sel),
-        .trap(trap),
-        .e_call_break(e_call_break),
-        .pred_succ(pred_succ)
+        .data_origin_o(data_origin),
+        .data_target_o(data_target),
+        .imm_o(imm),
+        .rs1_addr_o(rs1_addr),
+        .rs2_addr_o(rs2_addr),
+        .rd_addr_o(rd_addr),
+        .alu_opcode_o(alu_opcode),
+        .lsu_opcode_o(lsu_opcode),
+        .br_opcode_o(br_opcode),
+        .is_branch_o(is_branch),
+        .is_condition_o(is_condition),
+        .csr_opcode_o(csr_opcode),
+        .csr_addr_o(csr_addr),
+        .csr_data_o(csr_data),
+        .mem_w_o(mem_w),
+        .reg_w_o(reg_w)
     );
 
     localparam PERIOD = 10;
@@ -43,7 +61,7 @@ module decoder_tb();
         #(PERIOD);
         instruction = 32'habcde217; // auipc x4,0xabcde
         #(PERIOD);
-        instruction = 32'h004000ef; // jal x1,0x0000000c
+        instruction = 32'h00c000ef; // jal x1,0x0000000c
         #(PERIOD);
         instruction = 32'h00808267; // jalr x4,8(x1)
         #(PERIOD);
@@ -141,7 +159,7 @@ module decoder_tb();
     end
 
     initial begin
-        $dumpfile("../waveform/rv32_decoder_tb.vcd");
+        $dumpfile("../waveform/tb_decoder.vcd");
         $dumpvars();
     end
 

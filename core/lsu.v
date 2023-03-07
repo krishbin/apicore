@@ -1,8 +1,8 @@
 `include "../core/DEFINITIONS.v"
-`include "../core/memifdef.v"
 
 module rv32im_lsu (
-        // ----- mem_interface ----------
+        // mem_interface
+        //--------------------------------
         // we read memory to this input
         input [`API_DATA_WIDTH-1:0] val_memrd_i,
         output reg [`API_DATA_WIDTH-1:0] val_memwr_o,

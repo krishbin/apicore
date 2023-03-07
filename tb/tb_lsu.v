@@ -18,7 +18,6 @@ rv32im_lsu a1(
     .val_memwr_i(exu_data_to_mem),
     .val_memrd_o(mem_data_to_exu),
     .addr_mem_o(addr_mem_o),
-
     .wr_mask_o(wr_mask),
     .enable_o(enable)
     );

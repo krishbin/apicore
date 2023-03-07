@@ -1,10 +1,4 @@
-
 /tb/*.vvp       
-
-# gitignore template for Xilinx Vivado Design Suite
-# website: https://www.xilinx.com/support/download.html
-
-# [home]
 *.jou
 *.log
 *.debug
@@ -109,4 +103,8 @@ ipshared
 
 *.out
 *.vcd
+/tb/*.vvp       
+/tb/*.vvp       
 bin/
+waveform/
+waveforms/
