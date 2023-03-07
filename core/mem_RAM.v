@@ -12,6 +12,7 @@ module mem_RAM (
 );
 
     reg [31:0] simulated_RAM [0:16383]; // 16384 addresses of 32 bits = 64kb
+    wire [31:0] address = {2'b00, address_i[31:2]};
 
     integer i;
     always @(posedge clk or negedge reset_n) begin
@@ -22,16 +23,16 @@ module mem_RAM (
 
         if (~en_n) begin
             if (~|wr_mask_i)    // none of the wr mask is high implies read operation
-                data_out_o = simulated_RAM[address_i];
+                data_out_o = simulated_RAM[address];
             else begin
                 if (wr_mask_i[0]) 
-                    simulated_RAM[address_i][7:0] = data_in_i[7:0];
+                    simulated_RAM[address][7:0] = data_in_i[7:0];
                 if (wr_mask_i[1]) 
-                    simulated_RAM[address_i][15:8] = data_in_i[15:8];
+                    simulated_RAM[address][15:8] = data_in_i[15:8];
                 if (wr_mask_i[2]) 
-                    simulated_RAM[address_i][23:16] = data_in_i[23:16];
+                    simulated_RAM[address][23:16] = data_in_i[23:16];
                 if (wr_mask_i[3]) 
-                    simulated_RAM[address_i][31:24] = data_in_i[31:24];
+                    simulated_RAM[address][31:24] = data_in_i[31:24];
             end
         end
     end
