@@ -88,7 +88,7 @@ module rv32im_decoder_and_cu(
         rs2_addr_o = 'bz;
         rd_addr_o = 'bz;
         alu_opcode_o = 'bz;
-        lsu_opcode_o = 'bz;
+        lsu_opcode_o = 'hff;
         br_opcode_o = 'bz;
         csr_opcode_o = 'bz;
         csr_addr_o = 'bz;

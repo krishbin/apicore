@@ -274,9 +274,8 @@
     `define MISA_RVS      32'h00040000
     `define MISA_RVU      32'h00100000
 
-`endif
-// END OF INSTRUCTION SET CODES
 
+// memory related definitions
 
 // LSU Definitions
 `define LSU_FSM_IDLE  1'b0

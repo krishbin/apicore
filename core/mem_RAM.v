@@ -12,7 +12,7 @@ module mem_RAM (
 );
 
     reg [31:0] simulated_RAM [0:16383]; // 16384 addresses of 32 bits = 64kb
-    wire [31:0] address = {2'b00, address_i[31:2]};
+    wire [31:0] address = {2'b0, address_i[31:2]};
 
     integer i;
     always @(posedge clk or negedge reset_n) begin

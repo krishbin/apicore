@@ -18,7 +18,7 @@ module rv32im_lsu (
         output enable_o
 );
 
-        assign addr_mem_o = {addr_mem_i[`API_ADDR_WIDTH-1:2] , 2'b00};
+        assign addr_mem_o = addr_mem_i;
 
         // select which bytes to update during store operation, 4-pins represent selection for 4 bytes each.
         assign wr_mask_o  =     ( lsu_opcode_i === `LSU_OPCODE_SB ) ? 
@@ -34,7 +34,7 @@ module rv32im_lsu (
                                 ( lsu_opcode_i === `LSU_OPCODE_SW ) ? 4'b1111 : 4'b0000;
 
         // memory enable logic
-        assign enable_o = ( lsu_opcode_i ===`LSU_OPCODE_NONE ) ? 1'b0 : 1'b1;
+        assign enable_o = ( lsu_opcode_i === `LSU_OPCODE_NONE ) ? 1'b0 : 1'b1;
 
         always @ * begin
 
@@ -51,7 +51,7 @@ module rv32im_lsu (
                                                         {{`API_DATA_WIDTH-8{1'b0}},val_memrd_i[31:24]} ;
                         
                         `LSU_OPCODE_LH: val_memrd_o = (addr_mem_i[1] === 1'b0 ) ? 
-                                                        {{`API_DATA_WIDTH-26{val_memrd_i[15]}},val_memrd_i[15:0]} : 
+                                                        {{`API_DATA_WIDTH-16{val_memrd_i[15]}},val_memrd_i[15:0]} : 
                                                         {{`API_DATA_WIDTH-16{val_memrd_i[31]}},val_memrd_i[31:16]};
 
                         `LSU_OPCODE_LHU: val_memrd_o = (addr_mem_i[1] === 1'b0 ) ? 
