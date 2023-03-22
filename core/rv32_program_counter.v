@@ -12,7 +12,7 @@ module rv32im_pc(
 
     assign pc = pc_reg;
 
-    always @(posedge clk) 
+    always @(*) 
     begin
         if (~reset_n) begin
             pc_next <= `API_RESET_PC;
@@ -22,7 +22,7 @@ module rv32im_pc(
         end
     end
 
-    always @(negedge clk or negedge reset_n)
+    always @(negedge clk,  negedge reset_n)
     begin
         if (~reset_n) begin
             pc_reg <= `API_RESET_PC;

@@ -29,6 +29,8 @@ module rv32im_decoder_and_cu(
     output reg [`CSR_OPCODE_WIDTH-1:0] csr_opcode_o,
     output reg [`CSR_WIDTH-1:0] csr_addr_o,
     output reg [`API_DATA_WIDTH-1:0] csr_data_o,
+    output reg csr_wr_en_o,
+    output reg csr_rd_en_o,
 
     // memory
     output reg mem_w_o,
@@ -71,14 +73,13 @@ module rv32im_decoder_and_cu(
 
     wire [2:0] instruction_type;
 
-    reg we_csr,re_csr;
     // decode next available instruction
     always @(*) begin
 
         mem_w_o = 1'b0;
         reg_w_o = 1'b0;
-        we_csr = 1'b0;
-        re_csr = 1'b0;
+        csr_wr_en_o = 1'b0;
+        csr_rd_en_o = 1'b0;
         is_branch_o = 1'b0;
         is_condition_o = 1'b0;
         data_origin_o = 'bz;
@@ -183,23 +184,23 @@ module rv32im_decoder_and_cu(
                     `ECALL_EBREAK_FUNCT3: ;
                     `CSRRW_FUNCT3: begin
                         if ( rd != 0 ) begin
-                            we_csr = 1'b1;
-                            re_csr = 1'b1;
+                            csr_wr_en_o = 1'b1;
+                            csr_rd_en_o = 1'b1;
                             data_target_o = `DATA_TARGET_CSR;
                             csr_opcode_o = `CSR_OPCODE_CSRRW;
                             csr_data_o = rs1;
                         end
                     end
                     `CSRRS_FUNCT3: begin
-                        we_csr = ( rs1 == 5'h0 ) ? 1'b1 : 1'b0;
-                        re_csr = 1'b1;
+                        csr_wr_en_o = ( rs1 == 5'h0 ) ? 1'b1 : 1'b0;
+                        csr_rd_en_o = 1'b1;
                         data_target_o = `DATA_TARGET_CSR;
                         csr_opcode_o = `CSR_OPCODE_CSRRS;
                         csr_data_o = rs1;
                     end
                     `CSRRC_FUNCT3: begin
-                        we_csr = ( rs1 == 5'h0 ) ? 1'b1 : 1'b0;
-                        re_csr = 1'b1;
+                        csr_wr_en_o = ( rs1 == 5'h0 ) ? 1'b1 : 1'b0;
+                        csr_rd_en_o = 1'b1;
                         data_target_o = `DATA_TARGET_CSR;
                         csr_opcode_o = `CSR_OPCODE_CSRRS;
                         csr_data_o = rs1;
@@ -269,7 +270,7 @@ module rv32im_decoder_and_cu(
                 is_branch_o = 1'b1;
                 is_condition_o = 1'b1;
                 data_origin_o = `DATA_ORIGIN_REGISTER;
-                imm_o = { {19{1'b0}}, imm_12_b , {1'b0} };
+                imm_o = { {19{instruction[31]}}, imm_12_b , {1'b0} };
 
                 rs1_addr_o = rs1;
                 rs2_addr_o = rs2;
@@ -313,6 +314,8 @@ module rv32im_decoder_and_cu(
                 data_target_o = `DATA_TARGET_ALU;
                 mem_w_o = 1'b0;
                 lsu_opcode_o = `LSU_OPCODE_NONE;
+                csr_rd_en_o = 1'b0;
+                csr_wr_en_o = 1'b0;
             end
         endcase
     end

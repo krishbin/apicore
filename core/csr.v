@@ -84,5 +84,4 @@ module rv32im_csr(
         end
     end
 
-
 endmodule

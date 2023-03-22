@@ -65,8 +65,8 @@ module rv32im_lsu (
                         `LSU_OPCODE_SH: val_memwr_o = { {`API_DATA_WIDTH-16{1'b0}} , val_memwr_i[15:0]};
                         `LSU_OPCODE_SW: val_memwr_o = val_memwr_i;
                         default: begin
-                                val_memrd_o = {{`API_DATA_WIDTH{1'b0}}};
-                                val_memwr_o = {{`API_DATA_WIDTH{1'b0}}};
+                                // val_memrd_o = {{`API_DATA_WIDTH{1'b0}}};
+                                // val_memwr_o = {{`API_DATA_WIDTH{1'b0}}};
                         end
                 endcase
         end

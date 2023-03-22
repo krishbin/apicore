@@ -14,8 +14,8 @@ module mem_RAM (
     reg [31:0] simulated_RAM [0:16383]; // 16384 addresses of 32 bits = 64kb
     wire [31:0] address = {2'b0, address_i[31:2]};
 
-    integer i;
-    always @(posedge clk or negedge reset_n) begin
+    integer i, file;
+    always @(posedge clk, negedge clk, negedge reset_n) begin
         if (~reset_n) begin
             for (i=0;i<16384;i=i+1)
                 simulated_RAM[i] = 32'b0;
@@ -28,13 +28,23 @@ module mem_RAM (
                 if (wr_mask_i[0]) 
                     simulated_RAM[address][7:0] = data_in_i[7:0];
                 if (wr_mask_i[1]) 
-                    simulated_RAM[address][15:8] = data_in_i[15:8];
+                    simulated_RAM[address][15:8] = data_in_i[7:0];
                 if (wr_mask_i[2]) 
-                    simulated_RAM[address][23:16] = data_in_i[23:16];
+                    simulated_RAM[address][23:16] = data_in_i[7:0];
                 if (wr_mask_i[3]) 
-                    simulated_RAM[address][31:24] = data_in_i[31:24];
+                    simulated_RAM[address][31:24] = data_in_i[7:0];
             end
+
+            // view RAM content
+            file = $fopen("../bin/RAM.mem","a");
+            $fdisplay(file,"###########");
+            for(i=0;i<5;i++) begin
+                $fdisplay(file, "%h",simulated_RAM[i]);
+            end
+            $fclose(file);
         end
+
+        
     end
 
 endmodule
