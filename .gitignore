@@ -106,5 +106,5 @@ ipshared
 /tb/*.vvp       
 /tb/*.vvp       
 bin/
-waveform/
-waveforms/
+waveform/*.vcd
+assembler/__pycache__/
