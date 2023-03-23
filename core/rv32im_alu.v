@@ -1,4 +1,5 @@
 `include "../core/DEFINITIONS.v"
+
 module rv32im_alu(
     input [`API_DATA_WIDTH-1:0] aluoperand_1_i,
     input [`API_DATA_WIDTH-1:0] aluoperand_2_i,

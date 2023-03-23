@@ -10,7 +10,7 @@ module mem_ROM(
 );
 
     reg [`API_DATA_WIDTH-1:0] simulated_ROM [0:2047]; // 8KB of ROM memory
-    wire [31:0] address = {2'b00, address_i[31:2]};
+    wire [`API_ADDR_WIDTH-1:0] address = {2'b00, address_i[31:2]};
 
     always @(posedge clk or negedge reset_n) begin
         if (~reset_n)

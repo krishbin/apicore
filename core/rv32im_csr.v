@@ -1,5 +1,5 @@
-`include "DEFINITIONS.v"
-`include "csr_reg.v"
+`include "../core/DEFINITIONS.v"
+`include "../core/rv32im_csr_reg.v"
 
 module rv32im_csr(
     input clk_i,

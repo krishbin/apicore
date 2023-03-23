@@ -8,7 +8,7 @@ module rv32im_pc(
     output [`API_PC_WIDTH-1:0] pc
 );
 
-    reg [31:0] pc_reg, pc_next;
+    reg [`API_PC_WIDTH-1:0] pc_reg, pc_next;
 
     assign pc = pc_reg;
 

@@ -1,4 +1,4 @@
-`include "../core/exu.v"
+`include "../core/rv32im_exu.v"
 
 module rv32im_exu_testbench();
 

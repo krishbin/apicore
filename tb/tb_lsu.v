@@ -1,4 +1,4 @@
-`include "../core/lsu.v"
+`include "../core/rv32im_lsu.v"
 
 module rv32im_lsu_testbench();
 

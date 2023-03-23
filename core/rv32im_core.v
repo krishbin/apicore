@@ -1,21 +1,21 @@
-`include "DEFINITIONS.v"
+`include "../core/DEFINITIONS.v"
 // modules
-`include "rv32_program_counter.v"
-`include "rv32_decoder.v"
-`include "rv32_regfile.v"
-`include "exu.v"
-`include "csr.v"
-`include "mem_RAM.v"
-`include "mem_ROM.v"
+`include "../core/rv32im_pc.v"
+`include "../core/rv32im_decoder.v"
+`include "../core/rv32im_regfile.v"
+`include "../core/rv32im_exu.v"
+`include "../core/rv32im_csr.v"
+`include "../core/mem_RAM.v"
+`include "../core/mem_ROM.v"
 
 module core(
     input clk,
     input reset_n,
-    input [31:0] data_ROM,  // instruction
-    output [31:0] pc_curr,
-    input [31:0] data_RAM_i,
-    output [31:0] data_RAM_o,
-    output [31:0] addr_RAM_o,
+    input  [`API_DATA_WIDTH-1:0] data_ROM,  // instruction
+    output [`API_PC_WIDTH-1:0] pc_curr,
+    input  [`API_DATA_WIDTH-1:0] data_RAM_i,
+    output [`API_DATA_WIDTH-1:0] data_RAM_o,
+    output [`API_ADDR_WIDTH-1:0] addr_RAM_o,
     output [3:0] mem_wr_mask_o,
     output mem_RAM_enable
 );
@@ -25,29 +25,29 @@ module core(
     // reg [31:0] pc2exu_pc_curr;
     
     // decoder and csr connection
-    wire [2:0] csr_opcode;
-    wire [11:0] csr_addr;
-    wire [31:0] csr_data;
-    wire [31:0] csr_data_in, csr_data_out;
+    wire [`CSR_OPCODE_WIDTH-1:0] csr_opcode;
+    wire [`CSR_WIDTH-1:0] csr_addr;
+    wire [`CSR_XLEN-1:0] csr_data;
+    wire [`CSR_XLEN-1:0] csr_data_in, csr_data_out;
     wire csr_rd_en, csr_wr_en;
-    wire [31:0] csr_output;
+    wire [`CSR_XLEN-1:0] csr_output;
 
     // decoder and exu connection
-    wire [1:0] data_origin;
-    wire [1:0] data_target;
-    wire [4:0] alu_opcode;
-    wire [7:0] lsu_opcode;
-    wire [2:0] br_opcode;
+    wire [`DATA_ORIGIN_WIDTH-1:0] data_origin;
+    wire [`DATA_TARGET_WIDTH-1:0] data_target;
+    wire [`ALU_OPCODE_WIDTH-1:0] alu_opcode;
+    wire [`LSU_OPCODE_WIDTH-1:0] lsu_opcode;
+    wire [`BR_OPCODE_WIDTH-1:0] br_opcode;
     wire is_branch, is_condition;
-    wire [31:0] imm;
+    wire [`API_DATA_WIDTH-1:0] imm;
 
     // decoder and regfile connection
     wire [4:0] rs1_addr, rs2_addr, rd_addr;
     wire reg_we;
 
     // exu and regfile connection
-    wire [31:0] rs1_value, rs2_value;
-    wire [31:0] data;
+    wire [`API_DATA_WIDTH-1:0] rs1_value, rs2_value;
+    wire [`API_DATA_WIDTH-1:0] data;
 
     rv32im_pc core_pc(
         .clk(clk),

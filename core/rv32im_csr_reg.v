@@ -1,4 +1,4 @@
-`include "DEFINITIONS.v"
+`include "../core/DEFINITIONS.v"
 
 module rv32im_csr_regfile(
     input clk_i,

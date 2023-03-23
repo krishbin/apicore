@@ -1,9 +1,9 @@
 `timescale 1ns/1ps
 `include "../core/DEFINITIONS.v"
-`include "../core/exu.v"
+`include "../core/rv32im_exu.v"
 `include "../core/mem_RAM.v"
 `include "../core/mem_ROM.v"
-`include "../core/rv32_decoder.v"
+`include "../core/rv32im_decoder.v"
 
 module tb();
 

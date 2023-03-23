@@ -1,24 +1,24 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Wed Mar 22 07:34:03 2023
+[*] Thu Mar 23 06:54:26 2023
 [*]
 [dumpfile] "D:\Project\apicore\waveform\core.vcd"
-[dumpfile_mtime] "Wed Mar 22 07:30:01 2023"
-[dumpfile_size] 52935
+[dumpfile_mtime] "Thu Mar 23 06:46:17 2023"
+[dumpfile_size] 57996
 [savefile] "D:\Project\apicore\waveform\core.gtkw"
 [timestart] 0
 [size] 1920 1009
-[pos] -9 -9
-*-13.613741 36410 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] -1 -1
+*-14.620941 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb.
 [treeopen] tb.core_uut.
 [treeopen] tb.core_uut.core_exu.
 [treeopen] tb.core_uut.core_pc.
 [treeopen] tb.core_uut.csr_reg.
 [sst_width] 197
-[signals_width] 265
+[signals_width] 272
 [sst_expanded] 1
-[sst_vpaned_height] 297
+[sst_vpaned_height] 407
 @28
 [color] 4
 tb.clk
@@ -29,14 +29,14 @@ tb.reset_n
 @22
 [color] 2
 tb.core_uut.core_pc.pc[31:0]
-[color] 5
+[color] 6
 tb.core_uut.core_pc.pc_next[31:0]
 @200
 -ROM
 @22
 [color] 2
 tb.ROM.address_i[31:0]
-[color] 4
+[color] 3
 tb.core_uut.core_dec_n_cu.instruction[31:0]
 @200
 -DECODER
@@ -47,117 +47,44 @@ tb.core_uut.core_dec_n_cu.imm_o[31:0]
 -exu:ALU
 @22
 [color] 7
-tb.core_uut.core_exu.alu1.alu_opcode_i[4:0]
-@c00022
-[color] 4
-tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-@28
-[color] 4
-(0)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(1)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(2)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(3)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(4)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(5)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(6)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(7)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(8)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(9)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(10)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(11)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(12)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(13)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(14)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(15)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(16)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(17)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(18)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(19)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(20)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(21)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(22)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(23)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(24)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(25)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(26)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(27)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(28)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(29)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(30)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-[color] 4
-(31)tb.core_uut.core_exu.alu1.aluoperand_1_i[31:0]
-@1401200
--group_end
-@22
-[color] 4
-tb.core_uut.core_exu.alu1.aluoperand_2_i[31:0]
-[color] 4
-tb.core_uut.core_exu.alu1.alu_o[31:0]
+tb.core_uut.core_exu.exu_alu.alu_opcode_i[4:0]
+tb.core_uut.core_exu.exu_alu.aluoperand_1_i[31:0]
+tb.core_uut.core_exu.exu_alu.aluoperand_2_i[31:0]
+tb.core_uut.core_exu.exu_alu.alu_o[31:0]
 @28
 [color] 7
-tb.core_uut.core_exu.alu1.alu_zero_o
+tb.core_uut.core_exu.exu_alu.alu_zero_o
 @200
 -exu:br
 @28
 [color] 7
-tb.core_uut.core_exu.br1.br_opcode_i[2:0]
+tb.core_uut.core_exu.exu_br.br_opcode_i[2:0]
 [color] 7
-tb.core_uut.core_exu.br1.br_en_i
+tb.core_uut.core_exu.exu_br.br_en_i
 [color] 7
-tb.core_uut.core_exu.br1.br_conditional_i
+tb.core_uut.core_exu.exu_br.br_conditional_i
 @22
 [color] 2
-tb.core_uut.core_exu.br1.curr_pc_i[31:0]
-[color] 5
-tb.core_uut.core_exu.br1.offset[31:0]
-[color] 2
-tb.core_uut.core_exu.br1.nxt_pc_o[31:0]
+tb.core_uut.core_exu.exu_br.curr_pc_i[31:0]
+[color] 6
+tb.core_uut.core_exu.exu_br.offset[31:0]
+@23
+[color] 6
+tb.core_uut.core_exu.exu_br.nxt_pc_o[31:0]
 @200
 -exu:lsu
-@28
+@22
 [color] 7
-tb.core_uut.core_exu.lsu1.lsu_opcode_i[7:0]
-@22
+tb.core_uut.core_exu.exu_lsu.lsu_opcode_i[7:0]
 [color] 2
-tb.core_uut.core_exu.lsu1.addr_mem_i[31:0]
-@24
-tb.core_uut.core_exu.lsu1.val_memrd_o[31:0]
-@22
-tb.core_uut.core_exu.lsu1.val_memwr_i[31:0]
-[color] 5
-tb.core_uut.core_exu.lsu1.wr_mask_o[3:0]
+tb.core_uut.core_exu.exu_lsu.addr_mem_i[31:0]
+tb.core_uut.core_exu.exu_lsu.val_memrd_o[31:0]
+tb.core_uut.core_exu.exu_lsu.val_memwr_i[31:0]
 @200
 -Register
+@28
+[color] 7
+tb.core_uut.core_regfile.we_i
 @22
 [color] 2
 tb.core_uut.core_regfile.rd_addr_i[4:0]

@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "../core/lsu.v"
+`include "../core/rv32im_lsu.v"
 `include "../core/mem_RAM.v"
 
 module tb_lsu_ram();

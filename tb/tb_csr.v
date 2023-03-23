@@ -1,4 +1,4 @@
-`include "../core/csr.v"
+`include "../core/rv32im_csr.v"
 `include "../core/DEFINITIONS.v"
 
 module rv32im_csr_testbench();

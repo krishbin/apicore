@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "../core/rv32_program_counter.v"
+`include "../core/rv32im_pc.v"
 `include "../core/mem_ROM.v"
 
 module tb_pc_ROM();

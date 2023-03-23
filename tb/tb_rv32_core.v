@@ -1,5 +1,7 @@
 `timescale 1ns/1ps
-`include "../core/rv32_core.v"
+`include "../core/DEFINITIONS.v"
+`include "../core/rv32im_core.v"
+
 
 // testbench
 module tb();
@@ -7,11 +9,11 @@ module tb();
     reg reset_n;
     reg en_ROM;
 
-    wire [31:0] pc_curr;
+    wire [`API_PC_WIDTH-1:0] pc_curr;
     wire en_RAM;
-    wire [31:0] data_ROM;
-    wire [31:0] mem2core_din, core2mem_dout;
-    wire [31:0] RAM_addr;
+    wire [`API_DATA_WIDTH-1:0] data_ROM;
+    wire [`API_DATA_WIDTH-1:0] mem2core_din, core2mem_dout;
+    wire [`API_ADDR_WIDTH-1:0] RAM_addr;
     wire [3:0] wr_mask;
 
     core core_uut(

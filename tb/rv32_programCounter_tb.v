@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "../core/rv32_program_counter.v"
+`include "../core/rv32_pc.v"
 
 module rv32im_pc_tb();
 

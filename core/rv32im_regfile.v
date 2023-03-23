@@ -1,5 +1,3 @@
-// APICORE : RV32I 
-// Date    : 2023-01-23
 `include "../core/DEFINITIONS.v"
 
 module rv32im_regfile(
@@ -17,7 +15,7 @@ module rv32im_regfile(
     // continuous memory implementation for register file: 32 unique locations of 32-bit each
     reg [`API_REGISTER_WIDTH-1:0] registerArray [0:`API_REGISTER_COUNT-1];
     integer i;
-    always @(posedge clk_i or negedge rst_n_i) begin
+    always @(posedge clk_i, negedge rst_n_i) begin
         
         if ( ~rst_n_i ) begin
             for (i=0;i<`API_REGISTER_COUNT;i=i+1)

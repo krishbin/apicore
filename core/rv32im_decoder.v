@@ -85,12 +85,12 @@ module rv32im_decoder_and_cu(
         data_origin_o = 'bz;
         data_target_o = 'bz;
         imm_o = 'bz;
-        rs1_addr_o = 'bz;
-        rs2_addr_o = 'bz;
+        rs1_addr_o = 'b0;
+        rs2_addr_o = 'b0;
         rd_addr_o = 'bz;
-        alu_opcode_o = 'bz;
-        lsu_opcode_o = 'hff;
-        br_opcode_o = 'bz;
+        alu_opcode_o = `ALU_OPCODE_ADD;
+        lsu_opcode_o = `LSU_OPCODE_NONE;
+        br_opcode_o = `BR_OPCODE_NONE;
         csr_opcode_o = 'bz;
         csr_addr_o = 'bz;
         csr_data_o = 'bz;
@@ -134,7 +134,7 @@ module rv32im_decoder_and_cu(
                 rs1_addr_o = rs1;
                 rd_addr_o = rd;
                 case (func3)
-                    `ADD_SUB_FUNCT3: alu_opcode_o = func7[5] == 1'b1 ? `ALU_OPCODE_SUB : `ALU_OPCODE_ADD;
+                    `ADD_SUB_FUNCT3: alu_opcode_o = `ALU_OPCODE_ADD;
                     `SLL_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLL;
                     `SLT_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLT;
                     `SLTU_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLTU;
@@ -304,6 +304,7 @@ module rv32im_decoder_and_cu(
 
             default: begin
                 rs1_addr_o = 5'b0;
+                rs2_addr_o = 5'b0;
                 rd_addr_o = 5'b0;
                 alu_opcode_o = `ALU_OPCODE_ADD;
                 data_origin_o = `DATA_ORIGIN_REGISTER;
