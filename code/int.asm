@@ -1,4 +1,4 @@
-// integration test
+// load store test
 
 // load_store test
 lui x4, 0xbaadc
