@@ -1,23 +1,23 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Thu Mar 23 06:54:26 2023
+[*] Sun Mar 26 03:27:51 2023
 [*]
 [dumpfile] "D:\Project\apicore\waveform\core.vcd"
-[dumpfile_mtime] "Thu Mar 23 06:46:17 2023"
-[dumpfile_size] 57996
+[dumpfile_mtime] "Sun Mar 26 03:27:02 2023"
+[dumpfile_size] 471529
 [savefile] "D:\Project\apicore\waveform\core.gtkw"
 [timestart] 0
 [size] 1920 1009
 [pos] -1 -1
-*-14.620941 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-19.193985 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb.
 [treeopen] tb.core_uut.
 [treeopen] tb.core_uut.core_exu.
 [treeopen] tb.core_uut.core_pc.
 [treeopen] tb.core_uut.csr_reg.
-[sst_width] 197
+[sst_width] 42
 [signals_width] 272
-[sst_expanded] 1
+[sst_expanded] 0
 [sst_vpaned_height] 407
 @28
 [color] 4

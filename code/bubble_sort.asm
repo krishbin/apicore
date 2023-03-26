@@ -12,16 +12,15 @@ lui  x4,     0x15c5
 srl  x4, x4, x2
 sh   x4,     0x08(x1)
 
-
 addi x8, x0, 9 // x8 = i = 9
 
-main_loop:  addi x2, x0, 9 // x2 = j = 9
+main_loop:  add x2, x0, x8 // x2 = j = i
         addi x3, x0, 0x20
 
         i_loop:  addi x4, x3, 0x01
                 lbu x5, 0x00(x3)
                 lbu x6, 0x00(x4)
-                blt x5, x6, next // if x5 < x6, next
+                bltu x5, x6, next // if x5 < x6, next
                 sb x5, 0x00(x4)
                 sb x6, 0x00(x3)
         next:   addi x2, x2, -0x01
