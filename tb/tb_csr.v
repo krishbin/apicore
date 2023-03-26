@@ -27,31 +27,38 @@ rv32im_csr csr_reg(
 
     always #(cycle/2) clk = ~clk;
 
+    always @(negedge clk) begin
+        if ( csr_opcode === `CSR_OPCODE_CSRRW || csr_opcode === `CSR_OPCODE_CSRRW) begin
+            csr_write_en = 1'b1;
+            csr_read_en = 1'b1;
+        end
+        else begin
+            csr_write_en = 1'b0;
+            csr_read_en = 1'b1;
+        end
+    end
+
 initial begin
 
     $dumpfile("../waveform/csr.vcd");
     $dumpvars();
-    $monitor("clk=%h, rst_n=%h, csr_opcode=%h, csr_addr=%h, val_csr_to_write=%h, csr_write_en=%h, val_csr_to_read=%h, csr_read_en=%h", clk, rst_n, csr_opcode, csr_addr, val_csr_to_write, csr_write_en, val_csr_to_read, csr_read_en);
+    // $monitor("clk=%h, rst_n=%h, csr_opcode=%h, csr_addr=%h, val_csr_to_write=%h, csr_write_en=%h, val_csr_to_read=%h, csr_read_en=%h", clk, rst_n, csr_opcode, csr_addr, val_csr_to_write, csr_write_en, val_csr_to_read, csr_read_en);
     // Initialize Inputs
     clk = 0;
     rst_n = 0;
     #cycle;
     rst_n = 1;
     
-
-    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; csr_write_en=0; val_csr_to_write=32'h00000000; csr_read_en=1; #cycle;
-    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; csr_write_en=0; val_csr_to_write=32'h00000000; csr_read_en=1; #cycle;
-
-    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MSTATUS; csr_write_en=1; val_csr_to_write=32'hF0000000; #cycle;
-
-    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MSTATUS; csr_write_en=0; val_csr_to_write=32'h00000000; csr_read_en=1; #cycle;
-
-    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MSTATUS; csr_write_en=1; val_csr_to_write=32'h0F000000; csr_read_en=1; #cycle;
-    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; csr_write_en=0; val_csr_to_write=32'h0F000000; csr_read_en=1; #cycle;
-    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; csr_write_en=0; val_csr_to_write=32'h0F000000; csr_read_en=1; #cycle;
-    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; csr_write_en=0; val_csr_to_write=32'h0F000000; csr_read_en=1; #cycle;
-    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; csr_write_en=0; val_csr_to_write=32'h0F000000; csr_read_en=1; #cycle;
-    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; csr_write_en=0; val_csr_to_write=32'h0F000000; csr_read_en=1; #cycle;
+    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; val_csr_to_write=32'h00000000; #cycle;
+    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; val_csr_to_write=32'h00000000; #cycle;
+    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MSTATUS; val_csr_to_write=32'hF0000000; #cycle;
+    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MSTATUS; val_csr_to_write=32'h00000000; #cycle;
+    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MSTATUS; val_csr_to_write=32'h0F000000; #cycle;
+    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; val_csr_to_write=32'h0F000000; #cycle;
+    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; val_csr_to_write=32'h0F000000; #cycle;
+    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; val_csr_to_write=32'h0F000000; #cycle;
+    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; val_csr_to_write=32'h0F000000; #cycle;
+    csr_opcode=`CSR_OPCODE_CSRRW; csr_addr=`CSR_MCYCLE; val_csr_to_write=32'h0F000000; #cycle;
     $finish;
 end
 

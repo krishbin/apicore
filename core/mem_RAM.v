@@ -33,13 +33,16 @@ module mem_RAM (
                     simulated_RAM[address][23:16] = data_in_i[23:16];
                 if (wr_mask_i[3]) 
                     simulated_RAM[address][31:24] = data_in_i[31:24];
+                
                 // view RAM content
-                // file = $fopen("../bin/RAM.mem","a");
-                // $fdisplay(file,"###########");
-                // for(i=0;i<5;i++) begin
-                //     $fdisplay(file, "%h",simulated_RAM[i]);
-                // end
-                // $fclose(file);
+                if (clk === 1'b1) begin
+                    file = $fopen("../bin/RAM.mem","a");
+                    $fdisplay(file,"###########");
+                    for(i=8;i<12;i++) begin
+                        $fdisplay(file, "%h",simulated_RAM[i]);
+                    end
+                    $fclose(file);
+                end
             end 
         end
     end
