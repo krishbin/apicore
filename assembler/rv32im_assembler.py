@@ -249,7 +249,7 @@ def decode_i(line):
     return code
 
 for line in lines:
-    # print(line)
+    # print(line['instruction'])
     inst_type = line['type']
     code = ""
 

@@ -146,8 +146,8 @@ def twosComp(value):
     max_bin = bin(2**(len(value)))
     two_com = bin(int(max_bin, 2) - int(value, 2))
     two_com = two_com[2:]
-    if (len(two_com) != len(value)):
-            two_com = '0' + two_com
+    while (len(two_com) != len(value)):
+        two_com = '0' + two_com
     return two_com
 
 def convertTobin(immediate):
