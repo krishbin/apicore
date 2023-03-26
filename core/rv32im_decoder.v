@@ -114,15 +114,27 @@ module rv32im_decoder_and_cu(
                 rs1_addr_o = rs1;
                 rs2_addr_o = rs2;
                 rd_addr_o = rd;
-                case (func3)
-                    `ADD_SUB_FUNCT3: alu_opcode_o = func7[5] == 1'b1 ? `ALU_OPCODE_SUB : `ALU_OPCODE_ADD;
-                    `SLL_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLL;
-                    `SLT_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLT;
-                    `SLTU_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLTU;
-                    `XOR_FUNCT3: alu_opcode_o = `ALU_OPCODE_XOR;
-                    `SRL_SRA_FUNCT3: alu_opcode_o = func7[5] == 1'b1 ? `ALU_OPCODE_SRA : `ALU_OPCODE_SRL;
-                    `OR_FUNCT3: alu_opcode_o = `ALU_OPCODE_OR;
-                    `AND_FUNCT3: alu_opcode_o = `ALU_OPCODE_AND;
+                case (func7[0])
+                1'b0:    case (func3)
+                            `ADD_SUB_FUNCT3: alu_opcode_o = func7[5] == 1'b1 ? `ALU_OPCODE_SUB : `ALU_OPCODE_ADD;
+                            `SLL_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLL;
+                            `SLT_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLT;
+                            `SLTU_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLTU;
+                            `XOR_FUNCT3: alu_opcode_o = `ALU_OPCODE_XOR;
+                            `SRL_SRA_FUNCT3: alu_opcode_o = func7[5] == 1'b1 ? `ALU_OPCODE_SRA : `ALU_OPCODE_SRL;
+                            `OR_FUNCT3: alu_opcode_o = `ALU_OPCODE_OR;
+                            `AND_FUNCT3: alu_opcode_o = `ALU_OPCODE_AND;
+                        endcase
+                1'b1:   case (func3)
+                            `MUL_FUNCT3:    alu_opcode_o = `ALU_OPCODE_MUL;
+                            `MULH_FUNCT3:   alu_opcode_o = `ALU_OPCODE_MULH;
+                            `MULHSU_FUNCT3: alu_opcode_o = `ALU_OPCODE_MULHSU;
+                            `MULHU_FUNCT3:  alu_opcode_o = `ALU_OPCODE_MULHU;
+                            `DIV_FUNCT3:    alu_opcode_o = `ALU_OPCODE_DIV;
+                            `DIVU_FUNCT3:   alu_opcode_o = `ALU_OPCODE_DIVU;
+                            `REM_FUNCT3:   alu_opcode_o = `ALU_OPCODE_REM;
+                            `REMU_FUNCT3:   alu_opcode_o = `ALU_OPCODE_REMU;
+                        endcase
                 endcase
                 data_target_o = `DATA_TARGET_ALU; // use data from alu
             end

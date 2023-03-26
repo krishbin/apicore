@@ -27,6 +27,26 @@ always @ * begin
             alu_o = sub_o1_o2; // SUB
         end
 
+        `ALU_OPCODE_MUL:
+        begin
+            alu_o = (aluoperand_1_i[15:0] * aluoperand_2_i[15:0]);
+        end
+
+        `ALU_OPCODE_MULH:
+        begin
+            alu_o = (aluoperand_1_i[31:16] * aluoperand_2_i[31:16]);
+        end
+
+        `ALU_OPCODE_DIV:
+        begin
+            alu_o = aluoperand_1_i / aluoperand_2_i; // ADD
+        end
+
+        `ALU_OPCODE_REM:
+        begin
+            alu_o = aluoperand_1_i % aluoperand_2_i; // ADD
+        end
+
         //Logical
         `ALU_OPCODE_AND: 
         begin

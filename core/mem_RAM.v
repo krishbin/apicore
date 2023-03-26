@@ -39,7 +39,7 @@ module mem_RAM (
                     file = $fopen("../bin/RAM.mem","a");
                     $fdisplay(file,"###########");
                     for(i=8;i<12;i++) begin
-                        $fdisplay(file, "%h",simulated_RAM[i]);
+                        $fdisplay(file, "0x%h : %h",i[15:0], simulated_RAM[i]);
                     end
                     $fclose(file);
                 end

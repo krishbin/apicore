@@ -58,7 +58,7 @@ module tb();
         #10;
         reset_n = 1'b1;
 
-        #7600;
+        #4650;
         $finish;
     end
 endmodule
