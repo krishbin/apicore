@@ -29,6 +29,8 @@ module rv32im_decoder_and_cu(
     output reg [`CSR_OPCODE_WIDTH-1:0] csr_opcode_o,
     output reg [`CSR_WIDTH-1:0] csr_addr_o,
     output reg [`API_DATA_WIDTH-1:0] csr_data_o,
+    output reg csr_wr_en_o,
+    output reg csr_rd_en_o,
 
     // memory
     output reg mem_w_o,
@@ -71,25 +73,24 @@ module rv32im_decoder_and_cu(
 
     wire [2:0] instruction_type;
 
-    reg we_csr,re_csr;
     // decode next available instruction
     always @(*) begin
 
         mem_w_o = 1'b0;
         reg_w_o = 1'b0;
-        we_csr = 1'b0;
-        re_csr = 1'b0;
+        csr_wr_en_o = 1'b0;
+        csr_rd_en_o = 1'b0;
         is_branch_o = 1'b0;
         is_condition_o = 1'b0;
         data_origin_o = 'bz;
         data_target_o = 'bz;
         imm_o = 'bz;
-        rs1_addr_o = 'bz;
-        rs2_addr_o = 'bz;
+        rs1_addr_o = 'b0;
+        rs2_addr_o = 'b0;
         rd_addr_o = 'bz;
-        alu_opcode_o = 'bz;
-        lsu_opcode_o = 'bz;
-        br_opcode_o = 'bz;
+        alu_opcode_o = `ALU_OPCODE_ADD;
+        lsu_opcode_o = `LSU_OPCODE_NONE;
+        br_opcode_o = `BR_OPCODE_NONE;
         csr_opcode_o = 'bz;
         csr_addr_o = 'bz;
         csr_data_o = 'bz;
@@ -113,15 +114,27 @@ module rv32im_decoder_and_cu(
                 rs1_addr_o = rs1;
                 rs2_addr_o = rs2;
                 rd_addr_o = rd;
-                case (func3)
-                    `ADD_SUB_FUNCT3: alu_opcode_o = func7[5] == 1'b1 ? `ALU_OPCODE_SUB : `ALU_OPCODE_ADD;
-                    `SLL_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLL;
-                    `SLT_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLT;
-                    `SLTU_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLTU;
-                    `XOR_FUNCT3: alu_opcode_o = `ALU_OPCODE_XOR;
-                    `SRL_SRA_FUNCT3: alu_opcode_o = func7[5] == 1'b1 ? `ALU_OPCODE_SRA : `ALU_OPCODE_SRL;
-                    `OR_FUNCT3: alu_opcode_o = `ALU_OPCODE_OR;
-                    `AND_FUNCT3: alu_opcode_o = `ALU_OPCODE_AND;
+                case (func7[0])
+                1'b0:    case (func3)
+                            `ADD_SUB_FUNCT3: alu_opcode_o = func7[5] == 1'b1 ? `ALU_OPCODE_SUB : `ALU_OPCODE_ADD;
+                            `SLL_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLL;
+                            `SLT_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLT;
+                            `SLTU_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLTU;
+                            `XOR_FUNCT3: alu_opcode_o = `ALU_OPCODE_XOR;
+                            `SRL_SRA_FUNCT3: alu_opcode_o = func7[5] == 1'b1 ? `ALU_OPCODE_SRA : `ALU_OPCODE_SRL;
+                            `OR_FUNCT3: alu_opcode_o = `ALU_OPCODE_OR;
+                            `AND_FUNCT3: alu_opcode_o = `ALU_OPCODE_AND;
+                        endcase
+                1'b1:   case (func3)
+                            `MUL_FUNCT3:    alu_opcode_o = `ALU_OPCODE_MUL;
+                            `MULH_FUNCT3:   alu_opcode_o = `ALU_OPCODE_MULH;
+                            `MULHSU_FUNCT3: alu_opcode_o = `ALU_OPCODE_MULHSU;
+                            `MULHU_FUNCT3:  alu_opcode_o = `ALU_OPCODE_MULHU;
+                            `DIV_FUNCT3:    alu_opcode_o = `ALU_OPCODE_DIV;
+                            `DIVU_FUNCT3:   alu_opcode_o = `ALU_OPCODE_DIVU;
+                            `REM_FUNCT3:   alu_opcode_o = `ALU_OPCODE_REM;
+                            `REMU_FUNCT3:   alu_opcode_o = `ALU_OPCODE_REMU;
+                        endcase
                 endcase
                 data_target_o = `DATA_TARGET_ALU; // use data from alu
             end
@@ -133,7 +146,7 @@ module rv32im_decoder_and_cu(
                 rs1_addr_o = rs1;
                 rd_addr_o = rd;
                 case (func3)
-                    `ADD_SUB_FUNCT3: alu_opcode_o = func7[5] == 1'b1 ? `ALU_OPCODE_SUB : `ALU_OPCODE_ADD;
+                    `ADD_SUB_FUNCT3: alu_opcode_o = `ALU_OPCODE_ADD;
                     `SLL_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLL;
                     `SLT_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLT;
                     `SLTU_FUNCT3: alu_opcode_o = `ALU_OPCODE_SLTU;
@@ -183,23 +196,23 @@ module rv32im_decoder_and_cu(
                     `ECALL_EBREAK_FUNCT3: ;
                     `CSRRW_FUNCT3: begin
                         if ( rd != 0 ) begin
-                            we_csr = 1'b1;
-                            re_csr = 1'b1;
+                            csr_wr_en_o = 1'b1;
+                            csr_rd_en_o = 1'b1;
                             data_target_o = `DATA_TARGET_CSR;
                             csr_opcode_o = `CSR_OPCODE_CSRRW;
                             csr_data_o = rs1;
                         end
                     end
                     `CSRRS_FUNCT3: begin
-                        we_csr = ( rs1 == 5'h0 ) ? 1'b1 : 1'b0;
-                        re_csr = 1'b1;
+                        csr_wr_en_o = ( rs1 == 5'h0 ) ? 1'b1 : 1'b0;
+                        csr_rd_en_o = 1'b1;
                         data_target_o = `DATA_TARGET_CSR;
                         csr_opcode_o = `CSR_OPCODE_CSRRS;
                         csr_data_o = rs1;
                     end
                     `CSRRC_FUNCT3: begin
-                        we_csr = ( rs1 == 5'h0 ) ? 1'b1 : 1'b0;
-                        re_csr = 1'b1;
+                        csr_wr_en_o = ( rs1 == 5'h0 ) ? 1'b1 : 1'b0;
+                        csr_rd_en_o = 1'b1;
                         data_target_o = `DATA_TARGET_CSR;
                         csr_opcode_o = `CSR_OPCODE_CSRRS;
                         csr_data_o = rs1;
@@ -269,7 +282,7 @@ module rv32im_decoder_and_cu(
                 is_branch_o = 1'b1;
                 is_condition_o = 1'b1;
                 data_origin_o = `DATA_ORIGIN_REGISTER;
-                imm_o = { {19{1'b0}}, imm_12_b , {1'b0} };
+                imm_o = { {19{instruction[31]}}, imm_12_b , {1'b0} };
 
                 rs1_addr_o = rs1;
                 rs2_addr_o = rs2;
@@ -303,6 +316,7 @@ module rv32im_decoder_and_cu(
 
             default: begin
                 rs1_addr_o = 5'b0;
+                rs2_addr_o = 5'b0;
                 rd_addr_o = 5'b0;
                 alu_opcode_o = `ALU_OPCODE_ADD;
                 data_origin_o = `DATA_ORIGIN_REGISTER;
@@ -313,6 +327,8 @@ module rv32im_decoder_and_cu(
                 data_target_o = `DATA_TARGET_ALU;
                 mem_w_o = 1'b0;
                 lsu_opcode_o = `LSU_OPCODE_NONE;
+                csr_rd_en_o = 1'b0;
+                csr_wr_en_o = 1'b0;
             end
         endcase
     end

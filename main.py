@@ -37,6 +37,9 @@ def runtestbench(file):
     if not os.path.exists(f'{ROOT_DIR}/waveform'):
         os.makedirs(f'{ROOT_DIR}/waveform')
     # run the testbench
+
+    if (len(sys.argv) == 3):       # 3rd argument includes assembly program source and need to be assembled
+        os.system(f'cd {ROOT_DIR}/assembler && python3 rv32im_assembler.py ../code/{sys.argv[2]}')
     os.system(f'iverilog -grelative-include -o {ROOT_DIR}/bin/{file[:-2]} {ROOT_DIR}/tb/{file}')
     os.system(f'cd {ROOT_DIR}/waveform && vvp {ROOT_DIR}/bin/{file[:-2]}')
 
@@ -60,3 +63,11 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# sample prompt
+
+# python3 main.py tb_rv32_core.v 
+
+# if new assembly program
+# python3 main.py tb_rv32_core.v "newfile".asm
+# "newfile" must exists inside code folder

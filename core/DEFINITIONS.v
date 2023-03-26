@@ -142,25 +142,25 @@
 // 1      0         M
 // 1      1         F
 
-`define ALU_OPCODE_WIDTH            5
-`define ALU_OPCODE_ADD              5'b00000
-`define ALU_OPCODE_SUB              5'b01000
-`define ALU_OPCODE_SLL              5'b00001
-`define ALU_OPCODE_SLT              5'b00010
-`define ALU_OPCODE_SLTU             5'b00011
-`define ALU_OPCODE_XOR              5'b00100
-`define ALU_OPCODE_SRL              5'b00101
-`define ALU_OPCODE_SRA              5'b01101
-`define ALU_OPCODE_OR               5'b00110
-`define ALU_OPCODE_AND              5'b00111
-`define ALU_OPCODE_MUL              5'b10000
-`define ALU_OPCODE_MULH             5'b10001
-`define ALU_OPCODE_MULHSU           5'b10010
-`define ALU_OPCODE_MULHU            5'b10011
-`define ALU_OPCODE_DIV              5'b10100
-`define ALU_OPCODE_DIVU             5'b10101
-`define ALU_OPCODE_REM              5'b10110
-`define ALU_OPCODE_REMU             5'b10110
+`define ALU_OPCODE_WIDTH            6
+`define ALU_OPCODE_ADD              6'b000000
+`define ALU_OPCODE_SUB              6'b001000
+`define ALU_OPCODE_SLL              6'b000001
+`define ALU_OPCODE_SLT              6'b000010
+`define ALU_OPCODE_SLTU             6'b000011
+`define ALU_OPCODE_XOR              6'b000100
+`define ALU_OPCODE_SRL              6'b000101
+`define ALU_OPCODE_SRA              6'b001101
+`define ALU_OPCODE_OR               6'b000110
+`define ALU_OPCODE_AND              6'b000111
+`define ALU_OPCODE_MUL              6'b110000
+`define ALU_OPCODE_MULH             6'b110001
+`define ALU_OPCODE_MULHSU           6'b110010
+`define ALU_OPCODE_MULHU            6'b110011
+`define ALU_OPCODE_DIV              6'b110100
+`define ALU_OPCODE_DIVU             6'b110101
+`define ALU_OPCODE_REM              6'b110110
+`define ALU_OPCODE_REMU             6'b110110
 
 `define BR_OPCODE_WIDTH 3
 `define BR_OPCODE_BEQ   3'b000
@@ -274,9 +274,8 @@
     `define MISA_RVS      32'h00040000
     `define MISA_RVU      32'h00100000
 
-`endif
-// END OF INSTRUCTION SET CODES
 
+// memory related definitions
 
 // LSU Definitions
 `define LSU_FSM_IDLE  1'b0

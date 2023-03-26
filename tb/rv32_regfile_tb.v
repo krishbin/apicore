@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "../core/rv32_regfile.v"
+`include "../core/rv32im_regfile.v"
 
 module rv32_regfile_tb();
 

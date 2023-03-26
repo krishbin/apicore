@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 `include "../core/DEFINITIONS.v"
-`include "../core/br.v"
+`include "../core/rv32im_br.v"
 
 module rv32im_br_tb();
 

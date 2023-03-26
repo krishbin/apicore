@@ -1,0 +1,130 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Sun Mar 26 03:27:51 2023
+[*]
+[dumpfile] "D:\Project\apicore\waveform\core.vcd"
+[dumpfile_mtime] "Sun Mar 26 03:27:02 2023"
+[dumpfile_size] 471529
+[savefile] "D:\Project\apicore\waveform\core.gtkw"
+[timestart] 0
+[size] 1920 1009
+[pos] -1 -1
+*-19.193985 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb.
+[treeopen] tb.core_uut.
+[treeopen] tb.core_uut.core_exu.
+[treeopen] tb.core_uut.core_pc.
+[treeopen] tb.core_uut.csr_reg.
+[sst_width] 42
+[signals_width] 272
+[sst_expanded] 0
+[sst_vpaned_height] 407
+@28
+[color] 4
+tb.clk
+[color] 4
+tb.reset_n
+@200
+-PC
+@22
+[color] 2
+tb.core_uut.core_pc.pc[31:0]
+[color] 6
+tb.core_uut.core_pc.pc_next[31:0]
+@200
+-ROM
+@22
+[color] 2
+tb.ROM.address_i[31:0]
+[color] 3
+tb.core_uut.core_dec_n_cu.instruction[31:0]
+@200
+-DECODER
+@22
+[color] 4
+tb.core_uut.core_dec_n_cu.imm_o[31:0]
+@200
+-exu:ALU
+@22
+[color] 7
+tb.core_uut.core_exu.exu_alu.alu_opcode_i[4:0]
+tb.core_uut.core_exu.exu_alu.aluoperand_1_i[31:0]
+tb.core_uut.core_exu.exu_alu.aluoperand_2_i[31:0]
+tb.core_uut.core_exu.exu_alu.alu_o[31:0]
+@28
+[color] 7
+tb.core_uut.core_exu.exu_alu.alu_zero_o
+@200
+-exu:br
+@28
+[color] 7
+tb.core_uut.core_exu.exu_br.br_opcode_i[2:0]
+[color] 7
+tb.core_uut.core_exu.exu_br.br_en_i
+[color] 7
+tb.core_uut.core_exu.exu_br.br_conditional_i
+@22
+[color] 2
+tb.core_uut.core_exu.exu_br.curr_pc_i[31:0]
+[color] 6
+tb.core_uut.core_exu.exu_br.offset[31:0]
+@23
+[color] 6
+tb.core_uut.core_exu.exu_br.nxt_pc_o[31:0]
+@200
+-exu:lsu
+@22
+[color] 7
+tb.core_uut.core_exu.exu_lsu.lsu_opcode_i[7:0]
+[color] 2
+tb.core_uut.core_exu.exu_lsu.addr_mem_i[31:0]
+tb.core_uut.core_exu.exu_lsu.val_memrd_o[31:0]
+tb.core_uut.core_exu.exu_lsu.val_memwr_i[31:0]
+@200
+-Register
+@28
+[color] 7
+tb.core_uut.core_regfile.we_i
+@22
+[color] 2
+tb.core_uut.core_regfile.rd_addr_i[4:0]
+[color] 2
+tb.core_uut.core_regfile.rs1_addr_i[4:0]
+[color] 2
+tb.core_uut.core_regfile.rs2_addr_i[4:0]
+[color] 4
+tb.core_uut.core_regfile.val_rd_i[31:0]
+[color] 4
+tb.core_uut.core_regfile.val_rs1_o[31:0]
+[color] 4
+tb.core_uut.core_regfile.val_rs2_o[31:0]
+@200
+-RAM
+@22
+[color] 2
+tb.RAM.address[31:0]
+[color] 2
+tb.RAM.address_i[31:0]
+@28
+[color] 7
+tb.RAM.en
+@22
+tb.RAM.data_out_o[31:0]
+@c00022
+[color] 7
+tb.RAM.wr_mask_i[3:0]
+@28
+[color] 7
+(0)tb.RAM.wr_mask_i[3:0]
+[color] 7
+(1)tb.RAM.wr_mask_i[3:0]
+[color] 7
+(2)tb.RAM.wr_mask_i[3:0]
+[color] 7
+(3)tb.RAM.wr_mask_i[3:0]
+@1401200
+-group_end
+@22
+tb.RAM.data_in_i[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

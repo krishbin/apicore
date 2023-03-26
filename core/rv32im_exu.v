@@ -1,7 +1,7 @@
 `include "../core/DEFINITIONS.v"
-`include "../core/lsu.v"
-`include "../core/alu.v"
-`include "../core/br.v"
+`include "../core/rv32im_lsu.v"
+`include "../core/rv32im_alu.v"
+`include "../core/rv32im_br.v"
 
 module rv32im_exu(
         // decocder to exu interface
@@ -19,6 +19,8 @@ module rv32im_exu(
         input [`API_DATA_WIDTH-1:0]  val_memdatard_i, // data read from memory
         output [`API_DATA_WIDTH-1:0] val_memdatawr_o, // data to write to memory
         output [`API_ADDR_WIDTH-1:0] val_memaddr_o, // address to read and write from
+        output [3:0] mem_wr_mask_o,
+        output mem_enable_o,
         // exu to br interface
         input is_branch_i,
         input is_condition_i,
@@ -38,7 +40,7 @@ module rv32im_exu(
         reg [`API_ADDR_WIDTH-1:0] aluoperand_1;
         reg [`API_ADDR_WIDTH-1:0] aluoperand_2;
 
-        always @* begin
+        always @ * begin
                 data_o = 0;
                 aluoperand_1 = 0;
                 aluoperand_2 = 0;
@@ -78,7 +80,7 @@ module rv32im_exu(
                 endcase
         end
 
-        rv32im_alu alu1 (
+        rv32im_alu exu_alu (
                 .aluoperand_1_i(aluoperand_1),
                 .aluoperand_2_i(aluoperand_2),
                 .alu_opcode_i(alu_opcode_i),
@@ -86,7 +88,7 @@ module rv32im_exu(
                 .alu_zero_o(alu_zero)
         );
 
-        rv32im_lsu lsu1 (
+        rv32im_lsu exu_lsu (
                 .lsu_opcode_i(lsu_opcode_i),
                 // unimodified input from exu | data request from memory
                 .val_memrd_i(val_memdatard_i),
@@ -99,10 +101,12 @@ module rv32im_exu(
                 .val_memrd_o(mem_output),
                 // data sent from exu to lsu
                 .addr_mem_i(alu_result),
-                .addr_mem_o(val_memaddr_o)
+                .addr_mem_o(val_memaddr_o),
+                .wr_mask_o(mem_wr_mask_o),
+                .enable_o(mem_enable_o)
         );
 
-        rv32im_br br1 (
+        rv32im_br exu_br (
                 .alu_zero_i(alu_zero),
                 .br_en_i(is_branch_i),
                 .br_conditional_i(is_condition_i),

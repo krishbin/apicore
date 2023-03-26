@@ -25,13 +25,14 @@ always @ * begin
     offset = {{`API_ADDR_WIDTH-3{1'b0}}, 3'b100};
     if( br_en_i ) begin
         if( br_conditional_i ) begin
+            
             case (br_opcode_i)
                 `BR_OPCODE_BEQ:  offset = ( alu_zero_i) ? imm_i : 32'h4;
                 `BR_OPCODE_BNE:  offset = (!alu_zero_i) ? imm_i : 32'h4;
-                `BR_OPCODE_BLT:  offset = (!alu_zero_i && exu_calc_addr[31] === 1'b1) ? imm_i : 32'h4;
-                `BR_OPCODE_BGE:  offset = ( alu_zero_i || exu_calc_addr[31] === 1'b0) ? imm_i : 32'h4;
-                `BR_OPCODE_BLTU: offset = (!alu_zero_i && exu_calc_addr[31] === 1'b1) ? imm_i : 32'h4;
-                `BR_OPCODE_BGEU: offset = (!alu_zero_i || exu_calc_addr[31] === 1'b0) ? imm_i : 32'h4;
+                `BR_OPCODE_BLT:  offset = (!alu_zero_i && exu_calc_addr[0] === 1'b1) ? imm_i : 32'h4;
+                `BR_OPCODE_BGE:  offset = ( alu_zero_i || exu_calc_addr[0] === 1'b0) ? imm_i : 32'h4;
+                `BR_OPCODE_BLTU: offset = (!alu_zero_i && exu_calc_addr[0] === 1'b1) ? imm_i : 32'h4;
+                `BR_OPCODE_BGEU: offset = (!alu_zero_i || exu_calc_addr[0] === 1'b0) ? imm_i : 32'h4;
             endcase
             br_pc_o = br_pc;
         end

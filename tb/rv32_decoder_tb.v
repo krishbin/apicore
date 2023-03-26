@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "../core/rv32_decoder.v"
+`include "../core/rv32im_decoder.v"
 
 module decoder_tb();
     reg clk;
